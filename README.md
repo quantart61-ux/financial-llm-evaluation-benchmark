@@ -77,20 +77,3 @@ python fin_eval_verifier.py
 
 ---
 
-### Thông tin điền sẵn lên Turing & Mercor (Copy-Paste trực tiếp)
-
-Sau khi đẩy repo lên GitHub và chụp 2 tấm ảnh (1 ảnh terminal chạy `python fin_eval_verifier.py` + 1 ảnh bảng **10 Core Failure Traps** trong `README.md`), bạn dán thông tin sau vào hồ sơ:
-
-* **Project Title:**
-  > Financial LLM Reasoning Benchmark & RLHF Evaluation Rubric
-* **Project Description:**
-  > Designed an institutional financial reasoning benchmark, a 5-dimension weighted RLHF evaluation rubric, and an automated Python fact-checking engine to audit LLM performance on corporate finance and SEC 10-K analysis tasks. Formalized a 10-category taxonomy of adversarial financial failure modes—targeting Diluted EPS (ASC 260 Treasury Stock Method), working capital cash flow sign errors, EBITDA normalization traps, WACC/DCF cash-flow alignment, and operating leverage stress tests—enforcing a strict 0.20% numerical precision tolerance against ground-truth financial statements.
-* **Project Outcome:**
-  > Delivered a reproducible Python verification pipeline (`fin_eval_verifier.py`) and standardized RLHF grading rubric that automatically scores candidate model completions across numerical grounding, US GAAP/IFRS compliance, edge-case rigor, and anti-sycophancy—filtering out subtle quantitative hallucinations to curate gold-standard SFT/RLHF training data.
-* **Skills nên chọn:** `Financial Analysis`, `Corporate Finance`, `Financial Modeling`, `Quality Assurance`, `Large Language Models`, `Artificial Intelligence`, `Data Analysis`, `Python`
-
-<ElicitationsGroup message="Chọn bước hoàn thiện cuối cùng cho bộ hồ sơ của bạn:">
-  <Elicitation label="Tạo trọn bộ code và README cho Project Venture Capital Analyst (Job ID 95526)" query="Viết giúp tôi trọn bộ script Python hoàn chỉnh và nội dung file README.md cho Project 2: Venture Capital Deal Evaluation & SaaS Unit Economics Simulator để tôi đẩy thẳng lên GitHub."/>
-  <Elicitation label="Tạo trọn bộ code và README cho Project Consumer Lending Expert (Job ID 112467)" query="Viết giúp tôi trọn bộ script Python hoàn chỉnh và nội dung file README.md cho Project 3: Consumer Lending Underwriting & Expected Credit Loss (PD/LGD/EAD) Framework để tôi đẩy thẳng lên GitHub."/>
-  <Elicitation label="Lên kịch bản nói 2 phút cho bài phỏng vấn CORE trên Mercor" query="Soạn giúp tôi kịch bản trả lời bằng tiếng Anh dài đúng 2 phút (khoảng 260 từ) cho bài Domain Expert Interview CORE trên Mercor, kết hợp thế mạnh Corporate Finance và kiểm soát lỗi suy luận AI."/>
-</ElicitationsGroup>
