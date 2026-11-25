@@ -10,7 +10,7 @@ General-purpose LLMs frequently produce fluent financial commentary while commit
 
 1. **Adversarial Financial Reasoning Benchmark (10 Failure Traps):** Edge-case financial scenarios targeting high-frequency LLM failure modes across US GAAP accounting, credit underwriting, and corporate valuation.
 2. **Weighted 5-Dimension RLHF Grading Rubric:** Standardized evaluation criteria (0.00–5.00 scale) for scoring candidate model completions during SFT and RLHF preference ranking.
-3. **Automated SEC 10-K Fact-Checker (`fin_eval_verifier.py`):** A deterministic Python audit script enforcing a strict **0.20% relative error tolerance** against ground-truth financial statement figures.
+3. **Automated Financial Fact-Checker (`src/verifier.py`):** A deterministic Python audit engine enforcing a strict **0.20% relative error tolerance** against ground-truth financial statement figures.
 
 ---
 
@@ -47,7 +47,7 @@ Human domain evaluators and automated reward models score candidate completions 
 
 ## 4. Benchmark Execution & Automated Audit Output
 
-Running `python fin_eval_verifier.py` evaluates three candidate LLM completions against a normalized FY2025 SEC 10-K benchmark excerpt for **FedEx Corp. (NYSE: FDX)** (`$M`, except per-share data):
+The original normalized FY2025 SEC 10-K reference for **FedEx Corp. (NYSE: FDX)** (`$M`, except per-share data) is retained below. `python run_benchmark.py` now evaluates the 10 adversarial cases in `data/benchmark_cases.json`:
 
 ### Deterministic Gold-Standard Ground Truth
 - **GAAP EBITDA:** `$9,845.00M` (`$5,559.00M Operating Income + $4,286.00M D&A`)
@@ -56,7 +56,7 @@ Running `python fin_eval_verifier.py` evaluates three candidate LLM completions 
 - **Free Cash Flow:** `$3,156.00M` (`$9,845.00M GAAP EBITDA - $1,185.00M Cash Taxes - $5,178.00M CapEx - $326.00M NWC Increase`)
 - **Diluted Share Count (ASC 260):** `250.96M` (`248.40M Basic + [8.20M - ($1,492.40M / $264.50)]`; `5.50M` Tranche B options @ `$295.00` strike excluded as anti-dilutive)
 
-### Candidate Model Scorecard
+### Original FDX Candidate Model Scorecard
 
 | Candidate Model | Checks Passed | Weighted RLHF Score | RLHF Verdict | Detected Failure Modes |
 | :--- | :---: | :---: | :--- | :--- |
@@ -70,12 +70,13 @@ Running `python fin_eval_verifier.py` evaluates three candidate LLM completions 
 
 ```bash
 pip install -r requirements.txt
-python fin_eval_verifier.py
+python -m pytest -v
+python run_benchmark.py
 ```
 
 ---
 
 ## 6. Scope & Limitations
 
-- The verification engine currently evaluates structured scalar payloads (`dict` mappings); parsing raw unstructured LLM Markdown tables via regex/AST schema extraction is scheduled for the next release.
-- Free Cash Flow in the benchmark module uses a standard EBITDA-to-FCF bridge (`GAAP EBITDA - Cash Taxes - CapEx - ΔNWC`) rather than full working-capital sub-ledger schedules.
+- All 10 adversarial benchmark traps are implemented and verified using structured scalar ground truth and candidate payloads in `data/benchmark_cases.json`.
+- Free Cash Flow cases use a standard EBITDA-to-FCF bridge (`GAAP EBITDA - Cash Taxes - CapEx - ΔNWC`) rather than full working-capital sub-ledger schedules. Parsing raw unstructured LLM Markdown tables via regex/AST schema extraction remains out of scope.
