@@ -71,3 +71,11 @@ Running `python fin_eval_verifier.py` evaluates three candidate LLM completions 
 ```bash
 pip install -r requirements.txt
 python fin_eval_verifier.py
+```
+
+---
+
+## 6. Scope & Limitations
+
+- The verification engine currently evaluates structured scalar payloads (`dict` mappings); parsing raw unstructured LLM Markdown tables via regex/AST schema extraction is scheduled for the next release.
+- Free Cash Flow in the benchmark module uses a standard EBITDA-to-FCF bridge (`GAAP EBITDA - Cash Taxes - CapEx - ΔNWC`) rather than full working-capital sub-ledger schedules.
